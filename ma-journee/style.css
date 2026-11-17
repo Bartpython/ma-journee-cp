@@ -1,0 +1,160 @@
+/* ============================================
+   Couleurs et réglages utilisés partout
+   (on les change ici, une seule fois)
+   ============================================ */
+:root {
+  --fond: #F6F7F4;
+  --texte: #1F2A2E;
+  --texte-doux: #55626A;
+  --accent: #2F6F8F;
+  --accent-clair: #E6F0F4;
+  --bordure: #D5DAD2;
+  --blanc: #FFFFFF;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--fond);
+  color: var(--texte);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+}
+
+.page {
+  max-width: 480px;          /* sur ordinateur, la page reste étroite comme un téléphone */
+  margin: 0 auto;
+  padding: 24px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+section { display: flex; flex-direction: column; gap: 10px; }
+
+h1 { margin: 0; font-size: 28px; line-height: 1.2; }
+h2, .titre-label { margin: 0; font-size: 18px; font-weight: 700; }
+
+.entete { display: flex; flex-direction: column; gap: 6px; }
+.sur-titre {
+  margin: 0; font-size: 14px; font-weight: 700;
+  letter-spacing: 0.04em; text-transform: uppercase; color: var(--texte-doux);
+}
+.date, .aide, .resume, .facultatif { margin: 0; color: var(--texte-doux); }
+.facultatif { font-weight: 400; }
+
+/* ---------- Les onglets Matin / Midi / Après-midi ---------- */
+.onglets {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background: #E9ECE6;
+  padding: 6px;
+  border-radius: 16px;
+}
+.onglet {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  min-height: 72px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--texte);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.onglet.actif { background: var(--accent); color: var(--blanc); }
+
+/* ---------- Les cartes (activités et humeurs) ---------- */
+.grille, .humeurs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.carte {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 116px;
+  padding: 12px 6px;
+  border-radius: 16px;
+  border: 2px solid var(--bordure);
+  background: var(--blanc);
+  color: var(--texte);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.carte svg, .onglet svg, .bouton-son svg {
+  width: 44px; height: 44px;
+  fill: none; stroke: currentColor; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+/* Quand une carte est choisie, script.js lui ajoute la classe "choisie" */
+.carte.choisie { border-color: var(--accent); background: var(--accent-clair); }
+.carte.choisie::after {               /* la petite coche en haut à droite */
+  content: "✓";
+  position: absolute; top: 6px; right: 6px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--accent); color: var(--blanc);
+  font-size: 14px; line-height: 22px; text-align: center;
+}
+
+/* ---------- La note ---------- */
+textarea {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: 2px solid #C9CFC6;
+  background: var(--blanc);
+  color: var(--texte);
+  font: inherit;
+  line-height: 1.4;
+  resize: vertical;
+}
+
+/* ---------- Les boutons du bas ---------- */
+.bouton-envoyer {
+  min-height: 56px;
+  border: 0; border-radius: 16px;
+  background: var(--accent); color: var(--blanc);
+  font: inherit; font-size: 18px; font-weight: 700;
+  cursor: pointer;
+}
+.bouton-effacer {
+  min-height: 48px;
+  border: 2px solid var(--bordure); border-radius: 16px;
+  background: transparent; color: var(--texte-doux);
+  font: inherit; font-weight: 700;
+  cursor: pointer;
+}
+.confirmation {
+  margin: 0; padding: 14px 16px; border-radius: 14px;
+  background: #E3F1E7; color: #1E5631; font-weight: 700;
+}
+
+/* Contour bien visible quand on navigue au clavier */
+button:focus-visible, textarea:focus {
+  outline: 3px solid #9CC3D5;
+  outline-offset: 2px;
+}
+
+/* ---------- Spécial CP ---------- */
+.onglet svg { width: 28px; height: 28px; }
+.ligne-haut { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.bouton-son {
+  display: flex; align-items: center; gap: 6px;
+  min-height: 44px; padding: 6px 12px;
+  border: 2px solid var(--bordure); border-radius: 999px;
+  background: var(--blanc); color: var(--texte);
+  font: inherit; font-size: 14px; font-weight: 700; cursor: pointer;
+}
+.bouton-son svg { width: 22px; height: 22px; }
+.bouton-son.coupe { color: var(--texte-doux); }
+.bouton-son.coupe .ondes { display: none; }
